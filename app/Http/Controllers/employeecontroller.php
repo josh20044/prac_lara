@@ -10,8 +10,8 @@ class employeecontroller extends Controller
 {
     public function index()
     {   
-
-        return view ('employee.index');
+        $employees = employee::find($id);
+        return view ('employee.index', compact('employees'));
     }
 
     public function create()
@@ -23,16 +23,16 @@ class employeecontroller extends Controller
     public function store(Request $request)
     {
     $request->validate([
-        'fname' => 'required|max:255|',
-        'lname' => 'required|max:255|',
-        'midname' => 'required|max:255|',
-        'age' => 'required|',
-        'address' => 'required|max:255|',
-        'zip' => 'required|',
+        'fname' => 'required|max:255|String',
+        'lname' => 'required|max:255|String',
+        'midname' => 'required|max:255|String',
+        'age' => 'required|Integer',
+        'address' => 'required|max:255|String',
+        'zip' => 'required|Integer',
         
     ]);
 
-    ::create($request->all());
+    employee::create($request->all());
     return view ('employee.create');
     }
 
